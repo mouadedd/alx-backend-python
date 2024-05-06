@@ -13,5 +13,6 @@ def measure_time(n: int, max_delay: int) -> float:
     run(wait_n(n, max_delay))
 
     stop = time()
+    total_time = stop - start
 
-    return (stop - start) / n
+    return total_time / n
