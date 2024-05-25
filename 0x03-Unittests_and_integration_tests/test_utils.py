@@ -13,11 +13,21 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": 1}, ("a",), 1),
         ({"a": {"b": 2}}, ("a",), {"b": 2}),
         ({"a": {"b": 2}}, ("a", "b"), 2),
-])
+    ])
     def test_access_nested_map(
             self, nst: Dict, path: Tuple[str], exp: Union[Dict, int]) -> None:
         """test access of nesting by three level of nesting"""
         self.assertEqual(anm(nst, path), exp)
+
+    @parameterized.expand([
+        ({}, ("a",), KeyError),
+        ({"a": 1}, ("a", "b"), KeyError),
+    ])
+    def test_access_nested_map_exception(
+            self, nst: Dict, path: Tuple[str], exp: Exception) -> None:
+        """test a key error input"""
+        with self.assertRaises(exp):
+            anm(nst, path)
 
 
 if __name__ == '__main__':
