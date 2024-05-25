@@ -2,20 +2,20 @@
 """a test for utils module's access_nested_map"""
 import unittest
 from utils import access_nested_map as anm
-
+from typing import Any
 
 class TesAccessNestedMap(unittest.TestCase):
     """test the nested function with three level depth"""
-    def test_nested_number(self):
+    def test_nested_number(self) -> None:
         self.assertEqual(anm({"a": {"b": {"c": 1}}}, ["a", "b", "c"]), 1)
 
-    def test_one_nest(self):
+    def test_one_nest(self) -> None:
         self.assertEqual(anm({"a": 1}, "a"), 1)
 
-    def test_two_nest(self):
+    def test_two_nest(self) -> None:
         self.assertEqual(anm({"a": {"b": 2}}, "a"), {"b": 2})
 
-    def test_three_nest(self):
+    def test_three_nest(self) -> None:
         self.assertEqual(anm({"a": {"b": 2}}, ["a", "b"]), 2)
 
 
