@@ -2,30 +2,22 @@
 """a test for utils module's access_nested_map"""
 import unittest
 from utils import access_nested_map as anm
-from typing import Any
+from typing import Dict, Tuple, Union
 from parameterized import parameterized
-"""
-@parameterized([
-    ({"a": 1}, "a"), 1),
-    ({"a": {"b": 2}}, "a"), {"b": 2}),
-    ({"a": {"b": 2}}, ["a", "b"]), 2),
-])"""
 
 
 class TesAccessNestedMap(unittest.TestCase):
     """test the nested function with three level depth"""
 
-    def test_one_nest(self) -> None:
-        """test one level of nesting"""
-        self.assertEqual(anm({"a": 1}, "a"), 1)
-
-    def test_two_nest(self) -> None:
-        """test one level of nesting with a dict as result"""
-        self.assertEqual(anm({"a": {"b": 2}}, "a"), {"b": 2})
-
-    def test_three_nest(self) -> None:
-        """test three level of nesting"""
-        self.assertEqual(anm({"a": {"b": 2}}, ["a", "b"]), 2)
+    @parameterized.expand([
+        ({"a": 1}, ("a",), 1),
+        ({"a": {"b": 2}}, ("a",), {"b": 2}),
+        ({"a": {"b": 2}}, ("a", "b"), 2),
+])
+    def test_access_nested_map(
+            self, nst: Dict, path: Tuple[str], exp: Union[Dict, int]) -> None:
+        """test access of nesting by three level of nesting"""
+        self.assertEqual(anm(nst, path), exp)
 
 
 if __name__ == '__main__':
