@@ -6,7 +6,7 @@ from typing import Dict, Tuple, Union
 from parameterized import parameterized
 
 
-class TesAccessNestedMap(unittest.TestCase):
+class TestAccessNestedMap(unittest.TestCase):
     """test the nested function with three level depth"""
 
     @parameterized.expand([
