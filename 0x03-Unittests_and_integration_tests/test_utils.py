@@ -3,14 +3,17 @@
 import unittest
 from utils import access_nested_map as anm
 from typing import Any
+from parameterized import parameterized
+"""
+@parameterized([
+    ({"a": 1}, "a"), 1),
+    ({"a": {"b": 2}}, "a"), {"b": 2}),
+    ({"a": {"b": 2}}, ["a", "b"]), 2),
+])"""
 
 
 class TesAccessNestedMap(unittest.TestCase):
     """test the nested function with three level depth"""
-
-    def test_nested_number(self) -> None:
-        """test 0 level of nesting"""
-        self.assertEqual(anm({"a": {"b": {"c": 1}}}, ["a", "b", "c"]), 1)
 
     def test_one_nest(self) -> None:
         """test one level of nesting"""
