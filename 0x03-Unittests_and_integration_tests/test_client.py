@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """test client"""
+from io import StringIO
 import unittest
 from client import GithubOrgClient as git
 from parameterized import parameterized
@@ -51,6 +52,6 @@ class TestGithubOrgClient(unittest.TestCase):
             ({"license": {"key": "other_license"}}, "my_license", False)
         ])
         def test_has_licence(self, repo, license_key, state):
-            """ 7- parameterized """
-            output = GithubOrgClient.has_license(repo, license_key)
+            """ 7- parameterized test has_licence method """
+            output = git.has_license(repo, license_key)
             self.assertEqual(output, state)
