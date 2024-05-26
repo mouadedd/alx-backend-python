@@ -28,3 +28,20 @@ class TestGithubOrgClient(unittest.TestCase):
             test = git('test')
             output = test._public_repos_url
             self.assertEqual(output, payload["repos_url"])
+
+    @patch("client.get_json")
+    def test_public_repos(self, mocked):
+        """6-more patching"""
+        payload = [{"name": "Google"}, {"name": "YouTube"}]
+        mocked.return_value = payload
+
+        with patch("client.GithubOrgClient._public_repos_url",
+                   new_callable=PropertyMock) as mock:
+            mock.return_value = "hello world"
+            test = git("test")
+            output = test.public_repos()
+
+            wanted = [value["name"] for value in payload]
+            self.assertEqual(output, wanted)
+            mock.assert_called_once()
+            mocked.assert_called_once()
