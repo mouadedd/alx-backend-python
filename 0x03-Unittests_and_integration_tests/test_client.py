@@ -47,12 +47,11 @@ class TestGithubOrgClient(unittest.TestCase):
             mock.assert_called_once()
             mocked.assert_called_once()
 
-        @parameterized.expand([
-            ({"license": {"key": "my_license"}}, "my_license", True),
-            ({"license": {"key": "other_license"}}, "my_license", False)
-        ])
-        def test_has_licence(self, repo, license_key, state):
-            """ 7- parameterized test has_licence method """
-            test = git("test")
-            output = test.has_license(repo, license_key)
-            self.assertEqual(output, state)
+    @parameterized.expand([
+        ({"license": {"key": "my_license"}}, "my_license", True),
+        ({"license": {"key": "other_license"}}, "my_license", False)
+    ])
+    def test_has_license(self, repo, license_key, state):
+        """ 7-parameterized test has_license """
+        output = git.has_license(repo, license_key)
+        self.assertEqual(output, state)
