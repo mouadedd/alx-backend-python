@@ -53,5 +53,6 @@ class TestGithubOrgClient(unittest.TestCase):
         ])
         def test_has_licence(self, repo, license_key, state):
             """ 7- parameterized test has_licence method """
-            output = git.has_license(repo, license_key)
+            test = git("test")
+            output = test.has_license(repo, license_key)
             self.assertEqual(output, state)
